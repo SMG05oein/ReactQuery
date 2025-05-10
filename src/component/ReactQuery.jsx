@@ -5,12 +5,12 @@ import {useQuery} from "@tanstack/react-query";
 const ReactQuery = () => {
 
 
-    const fetchPost=()=>{return axios.get('http://localhost:5000/posts');}
+    const fetchPost=()=>{return axios.get('https://my-json-server.typicode.com/SMG05oein/ReactQuery/posts');}
 
     const {isError ,error,isLoading,data}=useQuery({
         /**API호출에 이름을 주는데 내가 posts라는 유일한 이름을 지어준 거 | GPT가 내 설명은 좀 아닌 거 같다고 했지만 난 내 설명도 맞다고 생각함
          * GPT성멸: 해당 API 요청을 식별하는 고유 키 (캐싱 및 중복 호출 방지)*/
-        queryKey:['posts'],
+        queryKey:['items'],
         //API호출하는 게 기능인가
         // queryFn:()=>{
         //     return axios.get('http://localhost:5000/posts');
@@ -18,7 +18,8 @@ const ReactQuery = () => {
         // 또는
         queryFn: fetchPost,
         retry:1, //실패 시 몇 번 재호출?
-        select:(data)=>{return data.data} //전체 중에서 어떤 거
+        select:(data)=>{return data.data}, //전체 중에서 어떤 거
+        // gcTime:10000, //캐쉬에 얼마나 있을 거야? 단위 ms | 기본 5분
 
     });
     console.log("dddd",data,isLoading,isError,error);
