@@ -1,14 +1,14 @@
 import axios, {post} from "axios";
-import {useQuery} from "@tanstack/react-query";
+import {useQueries, useQuery} from "@tanstack/react-query";
 
 const fetchPost=(postid)=>{
     // const id = queryData.queryKey;
     let check = postid?postid:''
-    console.log("qqewqq: ",postid);
+    console.log("qqewqq: ",check);
     return axios.get(`https://my-json-server.typicode.com/SMG05oein/ReactQuery/posts/${check}`);/*${id[1]}*/
 }
 
-export const usePostQuery=(postid)=>{
+export const usePostQuery=(postid)=> {
     return useQuery({
             queryKey: ['items', postid],
             // queryKey:['items',1],
@@ -19,7 +19,10 @@ export const usePostQuery=(postid)=>{
                 return data.data
             }, //전체 중에서 어떤 거
         }
-    )}
+    )
+
+
+}
 
 // const {isError ,error,isLoading,data, refetch}=useQuery({
 //     /**API호출에 이름을 주는데 내가 posts라는 유일한 이름을 지어준 거 | GPT가 내 설명은 좀 아닌 거 같다고 했지만 난 내 설명도 맞다고 생각함
